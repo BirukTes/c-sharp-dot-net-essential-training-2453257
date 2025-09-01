@@ -29,11 +29,14 @@ do {
 
     // Make sure it's a valid date before we try to convert it
     DateTime result;
-    if (DateTime.TryParse(inputStr, out result)) {
+    // make sure the date is in the correct format which is mm/dd/yyyy (US format)
+    if (DateTime.TryParse(inputStr, System.Globalization.CultureInfo.CreateSpecificCulture("en-US"), System.Globalization.DateTimeStyles.None, out result))
+    {
         string reverseDate = ReverseDateFormat(inputStr);
         Console.WriteLine($"The reversed format is {reverseDate}");
     }
-    else {
+    else
+    {
         Console.WriteLine("That's not a valid date, try again");
     }
 } while(true);
